@@ -1,0 +1,12 @@
+[Unit]
+Description=A doppler probe simulator for practice measuring blood pressure
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=sudo -u pi /usr/bin/python3 "/home/pi/Documents/Python Projects/blood_pressure/main.py"
+Restart=on-abort
+User=root
+
+[Install]
+WantedBy=multi-user.target

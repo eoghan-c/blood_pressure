@@ -38,7 +38,10 @@ class PressureSound:
 	sound_object  = None
 
 	def __init__(self, sound_folder, sound_filename):
-		sound_file = os.path.abspath( os.path.join(os.curdir, config.animals_dir, sound_folder, sound_filename) )
+		# Find the absolute path to the directory that this script is executing from
+		dir_path = os.path.dirname(os.path.realpath(__file__))
+		# Build the full absolute path to the sound file
+		sound_file = os.path.abspath( os.path.join(dir_path, config.animals_dir, sound_folder, sound_filename) )
 		if os.path.isfile( sound_file ):
 			self.sound_object = Sound( sound_file )
 

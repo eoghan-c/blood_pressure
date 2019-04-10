@@ -75,7 +75,7 @@ class AnimalSelector:
 		selected_animal = 1
 
 		for animal_num, rotary_switch_pin in config.animal_selector_pins.items():
-			if not GPIO.input(rotary_switch_pin):
+			if GPIO.input(rotary_switch_pin) == GPIO.LOW:
 				# Pin is connected, so animal animal_num is selected
 				selected_animal = animal_num
 				break

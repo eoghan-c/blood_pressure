@@ -35,11 +35,11 @@ class StopButton:
 		# Return stop_mode: Long press = 2 (exit program); Short press = 1 (shutdown)
 		stop_mode  = 0
 
-		if not GPIO.input(config.stop_button_pin):
+		if GPIO.input(config.stop_button_pin) == GPIO.LOW:
 			stop_mode  = 1
 
 			start_time = time.time()
-			while not GPIO.input(config.stop_button_pin):
+			while GPIO.input(config.stop_button_pin) == GPIO.LOW:
 				if time.time() - start_time > 3:
 					stop_mode = 2
 					break
@@ -57,7 +57,7 @@ class DopplerProbe:
 
 	def is_in_position(self):
 		# If the reed switch is activated, then the doppler probe is in position
-		return not GPIO.input(config.doppler_probe_pin)
+		return GPIO.input(config.doppler_probe_pin) == GPIO.LOW
 
 class AnimalSelector:
 	'A class to handle the rotary switch that is used to select "Animals"'

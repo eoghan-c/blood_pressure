@@ -37,11 +37,13 @@ class StopButton:
 
 		if GPIO.input(config.stop_button_pin) == GPIO.LOW:
 			stop_mode  = 1
+			print( f"      Stop button pressed: Shutdown (stop_mode={stop_mode}" )
 
 			start_time = time.time()
 			while GPIO.input(config.stop_button_pin) == GPIO.LOW:
 				if time.time() - start_time > 3:
 					stop_mode = 2
+					print( f"      Stop button pressed: Exit (stop_mode={stop_mode}" )
 					break
 
 		return stop_mode

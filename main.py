@@ -26,7 +26,7 @@ try:
 	doppler_probe_sim = DopplerProbeSim(0x28)
 
 	if doppler_probe_sim is not None:
-		# Now run the simulation (for as long as Status is run)
+		# Now run the simulation (for as long as Status is 'run')
 		while doppler_probe_sim.simulation_status is DopplerProbeSim.Status.run:
 			time.sleep(0.01)
 			doppler_probe_sim.play_pressure_sound()

@@ -61,17 +61,26 @@ class DopplerProbeSim:
 			elif stop_mode is 2:
 				self.simulation_status = DopplerProbeSim.Status.stop
 			return
-
+        
 		# Find out which animal we are dealing with
 		current_animal_num = self.animal_selector.get_selected_animal_num()
 
+        # Encode a safety mechanism. If selected_animal_num is 10,
+        #    then do not require the probe to be placed correctly,
+        #    and also set the current_animal_num to 1
+        ignore_probe_location = False
+        if current_animal_num > 9:
+            current_animal_num -= 9;
+            ignore_probe_location = True
+        
+        
 		# Check current_animal_num actually exists, otherwise set to animal num 1
 		if current_animal_num not in self.animals:
 			current_animal_num = 1
 
 		current_animal = self.animals[current_animal_num]
 
-		if self.doppler_probe.is_in_position():
+		if ignore_probe_location or self.doppler_probe.is_in_position():
 			# Discover the current pressure in mmHg
 			pressure_mmhg = self.pressure_sensor.read_pressure_sensor_mmhg()
 

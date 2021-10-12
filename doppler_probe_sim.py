@@ -70,7 +70,7 @@ class DopplerProbeSim:
         #    and also set the current_animal_num to 1
         ignore_probe_location = False
         if current_animal_num > 9:
-            current_animal_num -= 9;
+            current_animal_num -= 9; # E.g. if the selector is at '10', select Animal 1
             ignore_probe_location = True
         
         
